@@ -93,23 +93,60 @@ export default function Terms() {
             </ul>
 
             <h2 className="text-2xl font-semibold text-slate-900 mt-12 mb-4">5. Subscription and Pricing</h2>
-            <h3 className="text-xl font-semibold text-slate-800 mt-8 mb-3">Subscription Plans</h3>
+            
+            <h3 className="text-xl font-semibold text-slate-800 mt-8 mb-3">Auto-Renewing Subscription Details</h3>
+            <div className="bg-blue-50 rounded-lg p-6 mb-6">
+              <h4 className="font-semibold text-slate-900 mb-3">TotBook Pro Subscription</h4>
+              <ul className="list-disc pl-6 text-slate-600 space-y-2">
+                <li><strong>Subscription Title:</strong> TotBook Pro - Professional Booking Management</li>
+                <li><strong>Subscription Length:</strong> Monthly (auto-renews every month)</li>
+                <li><strong>Price:</strong> £29.99 per month</li>
+                <li><strong>Free Trial:</strong> 14-day free trial available for new users</li>
+              </ul>
+            </div>
+
+            <div className="bg-blue-50 rounded-lg p-6 mb-6">
+              <h4 className="font-semibold text-slate-900 mb-3">TotBook Pro Annual Subscription</h4>
+              <ul className="list-disc pl-6 text-slate-600 space-y-2">
+                <li><strong>Subscription Title:</strong> TotBook Pro Annual - Professional Booking Management</li>
+                <li><strong>Subscription Length:</strong> Annual (auto-renews every 12 months)</li>
+                <li><strong>Price:</strong> £299.99 per year (save £60 compared to monthly)</li>
+                <li><strong>Free Trial:</strong> 14-day free trial available for new users</li>
+              </ul>
+            </div>
+
+            <h3 className="text-xl font-semibold text-slate-800 mt-8 mb-3">Subscription Features</h3>
             <p className="text-slate-600 mb-4">
-              We offer various subscription plans with different features and pricing. Details of current plans are available on our website.
+              TotBook Pro subscriptions include:
             </p>
+            <ul className="list-disc pl-6 text-slate-600 space-y-2 mb-6">
+              <li>Unlimited bookings and customer management</li>
+              <li>Automated email reminders and notifications</li>
+              <li>Payment processing integration</li>
+              <li>Route optimization and service area management</li>
+              <li>Business analytics and reporting</li>
+              <li>Priority customer support</li>
+            </ul>
 
             <h3 className="text-xl font-semibold text-slate-800 mt-8 mb-3">Payment Terms</h3>
             <ul className="list-disc pl-6 text-slate-600 space-y-2 mb-6">
-              <li>Subscription fees are billed in advance on a monthly or annual basis</li>
-              <li>All fees are non-refundable except as required by law</li>
-              <li>We reserve the right to change pricing with 30 days notice</li>
-              <li>You are responsible for all applicable taxes</li>
-              <li>Payment processing is handled securely through Stripe</li>
+              <li>Subscription fees are billed in advance through your iTunes Account</li>
+              <li>Subscriptions automatically renew unless auto-renew is turned off at least 24 hours before the end of the current period</li>
+              <li>Your account will be charged for renewal within 24 hours prior to the end of the current period</li>
+              <li>You can manage subscriptions and turn off auto-renewal in your Account Settings after purchase</li>
+              <li>All fees are non-refundable except as required by law or Apple's policies</li>
+              <li>Prices are in GBP and may vary in other countries</li>
+              <li>Any unused portion of a free trial period will be forfeited when you purchase a subscription</li>
             </ul>
 
             <h3 className="text-xl font-semibold text-slate-800 mt-8 mb-3">Free Trial</h3>
             <p className="text-slate-600 mb-6">
-              We may offer a free trial period. At the end of the trial, your account will be automatically upgraded to a paid subscription unless you cancel.
+              We offer a 14-day free trial for new users. At the end of the trial, your account will be automatically upgraded to your selected paid subscription (monthly or annual) unless you cancel before the trial ends. You can cancel anytime during the trial period without being charged.
+            </p>
+
+            <h3 className="text-xl font-semibold text-slate-800 mt-8 mb-3">Cancellation and Refunds</h3>
+            <p className="text-slate-600 mb-6">
+              You can cancel your subscription at any time through your Apple ID account settings. Cancellation will take effect at the end of the current billing period. Refunds are handled according to Apple's refund policy.
             </p>
 
             <h2 className="text-2xl font-semibold text-slate-900 mt-12 mb-4">6. Intellectual Property</h2>
@@ -187,7 +224,22 @@ export default function Terms() {
               These Terms, together with our Privacy Policy, constitute the entire agreement between you and TotBook regarding your use of the Service.
             </p>
 
-            <h2 className="text-2xl font-semibold text-slate-900 mt-12 mb-4">17. Contact Information</h2>
+            <h2 className="text-2xl font-semibold text-slate-900 mt-12 mb-4">17. Apple App Store Terms</h2>
+            <p className="text-slate-600 mb-6">
+              If you download TotBook from the Apple App Store, you acknowledge and agree that:
+            </p>
+            <ul className="list-disc pl-6 text-slate-600 space-y-2 mb-6">
+              <li>These Terms are between you and TotBook only, not with Apple</li>
+              <li>Apple has no obligation to provide maintenance or support services for the app</li>
+              <li>Apple is not responsible for any product warranties or claims</li>
+              <li>Apple is not responsible for addressing any claims relating to the app</li>
+              <li>Apple and its subsidiaries are third-party beneficiaries of these Terms</li>
+            </ul>
+            <p className="text-slate-600 mb-6">
+              Use of the app is also subject to Apple's standard End User License Agreement (EULA) available at: <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a>
+            </p>
+
+            <h2 className="text-2xl font-semibold text-slate-900 mt-12 mb-4">18. Contact Information</h2>
             <p className="text-slate-600 mb-4">
               If you have any questions about these Terms, please contact us:
             </p>
@@ -200,6 +252,12 @@ export default function Terms() {
               </p>
               <p className="text-slate-600 mt-2">
                 <strong>Company:</strong> TotBook
+              </p>
+              <p className="text-slate-600 mt-2">
+                <strong>Privacy Policy:</strong> <Link href="/privacy" className="text-blue-600 hover:underline">https://totbook.co.uk/privacy</Link>
+              </p>
+              <p className="text-slate-600 mt-2">
+                <strong>Terms of Use:</strong> <Link href="/terms" className="text-blue-600 hover:underline">https://totbook.co.uk/terms</Link>
               </p>
             </div>
 
