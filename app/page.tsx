@@ -607,7 +607,7 @@ export default function Home() {
             ) : (
               <div className="text-center py-3">
                 <CheckCircle className="w-6 h-6 text-white mx-auto mb-2" />
-                <p className="text-white">Thank you! We'll notify you when the Android app launches.</p>
+                <p className="text-white">Thank you! We&apos;ll notify you when the Android app launches.</p>
               </div>
             )}
           </div>

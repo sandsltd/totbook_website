@@ -7,8 +7,6 @@ import {
   Users, 
   Download, 
   CreditCard, 
-  TrendingUp,
-  Calendar,
   LogOut,
   RefreshCw,
   Activity,
@@ -20,12 +18,8 @@ import {
   Clock
 } from 'lucide-react'
 import {
-  LineChart,
-  Line,
   AreaChart,
   Area,
-  BarChart,
-  Bar,
   PieChart,
   Pie,
   Cell,
@@ -33,9 +27,37 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer
 } from 'recharts'
+
+interface ActivityItem {
+  id: string
+  type: string
+  user: string
+  userId: string
+  businessName: string
+  action: string
+  date: string
+  timestamp: string
+  details?: string
+  subscriptionStatus?: string
+  phone?: string
+  fullName?: string
+  onboardingCompleted?: boolean
+}
+
+interface GrowthDataItem {
+  month: string
+  users: number
+  revenue: number
+}
+
+interface DeviceBreakdownItem {
+  name: string
+  value: number
+  color: string
+  [key: string]: string | number
+}
 
 interface DashboardStats {
   totalUsers: number
@@ -43,9 +65,9 @@ interface DashboardStats {
   totalDownloads: number
   activeTrials: number
   paidUsers: number
-  recentActivity: any[]
-  growthData: any[]
-  deviceBreakdown: any[]
+  recentActivity: ActivityItem[]
+  growthData: GrowthDataItem[]
+  deviceBreakdown: DeviceBreakdownItem[]
 }
 
 export default function AdminDashboard() {
@@ -61,8 +83,22 @@ export default function AdminDashboard() {
   })
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
-  const [selectedUser, setSelectedUser] = useState<any>(null)
-  const [userDetails, setUserDetails] = useState<any>(null)
+  const [selectedUser, setSelectedUser] = useState<ActivityItem | null>(null)
+  const [userDetails, setUserDetails] = useState<{
+    id: string;
+    email: string;
+    phone?: string;
+    fullName?: string;
+    businessName?: string;
+    subscriptionStatus?: string;
+    subscription?: {
+      status: string;
+      plan: string;
+      nextBilling?: string;
+      trialEnds?: string;
+    };
+    recentActivity: ActivityItem[];
+  } | null>(null)
   const [loadingUser, setLoadingUser] = useState(false)
   const router = useRouter()
   const supabase = createClient()
@@ -107,7 +143,7 @@ export default function AdminDashboard() {
     }
   }
 
-  const handleUserClick = (activity: any) => {
+  const handleUserClick = (activity: ActivityItem) => {
     setSelectedUser(activity)
     if (activity.userId) {
       fetchUserDetails(activity.userId)
@@ -247,12 +283,12 @@ export default function AdminDashboard() {
                   cx="50%"
                   cy="50%"
                   labelLine={false}
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                  label
                   outerRadius={80}
                   fill="#8884d8"
                   dataKey="value"
                 >
-                  {stats.deviceBreakdown.map((entry, index) => (
+                  {stats.deviceBreakdown.map((_entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
@@ -433,7 +469,7 @@ export default function AdminDashboard() {
                       <div>
                         <h3 className="text-sm font-medium text-gray-500 mb-3">Recent Activity</h3>
                         <div className="space-y-2">
-                          {userDetails.recentActivity.map((act: any, idx: number) => (
+                          {userDetails.recentActivity.map((act: ActivityItem, idx: number) => (
                             <div key={idx} className="flex justify-between items-center py-2 border-b last:border-0">
                               <span className="text-sm text-gray-600">{act.action}</span>
                               <span className="text-xs text-gray-400">{act.date}</span>

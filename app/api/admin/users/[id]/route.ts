@@ -4,8 +4,9 @@ import { createAdminClient } from '@/lib/supabase/admin'
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   try {
     // Check if user is authenticated using regular client
     const supabase = await createClient()
@@ -21,7 +22,7 @@ export async function GET(
     const { data: profile, error: profileError } = await adminSupabase
       .from('profiles')
       .select('*')
-      .eq('id', params.id)
+      .eq('id', id)
       .single()
     
     if (profileError) {
@@ -32,7 +33,7 @@ export async function GET(
     const { data: subscription } = await adminSupabase
       .from('subscriptions')
       .select('*')
-      .eq('user_id', params.id)
+      .eq('user_id', id)
       .order('created_at', { ascending: false })
       .limit(1)
       .single()
@@ -41,7 +42,7 @@ export async function GET(
     const { data: trial } = await adminSupabase
       .from('trials')
       .select('*')
-      .eq('user_id', params.id)
+      .eq('user_id', id)
       .order('created_at', { ascending: false })
       .limit(1)
       .single()
@@ -50,7 +51,7 @@ export async function GET(
     const { data: downloads } = await adminSupabase
       .from('app_downloads')
       .select('*')
-      .eq('user_id', params.id)
+      .eq('user_id', id)
       .order('created_at', { ascending: false })
       .limit(5)
     
@@ -58,7 +59,7 @@ export async function GET(
     const { data: activityLogs } = await adminSupabase
       .from('activity_logs')
       .select('*')
-      .eq('user_id', params.id)
+      .eq('user_id', id)
       .order('created_at', { ascending: false })
       .limit(10)
     
