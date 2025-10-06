@@ -39,7 +39,7 @@ export default function Home() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <Image 
-                src="/totbook-logo.png" 
+                src="/totbook-logo.png?v=2" 
                 alt="TotBook Logo" 
                 width={120} 
                 height={40} 
@@ -108,7 +108,7 @@ export default function Home() {
           <div className="text-center">
             <div className="mb-8">
               <Image 
-                src="/totbook-logo.png" 
+                src="/totbook-logo.png?v=2" 
                 alt="TotBook Logo" 
                 width={200} 
                 height={80} 
@@ -622,7 +622,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <Image 
-                src="/totbook-logo.png" 
+                src="/totbook-logo.png?v=2" 
                 alt="TotBook Logo" 
                 width={140} 
                 height={50} 
