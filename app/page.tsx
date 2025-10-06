@@ -2,10 +2,35 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
-import { Calendar, Users, Clock, Shield, Smartphone, CreditCard, BarChart, CheckCircle, Star, ArrowRight, Menu, X } from 'lucide-react'
+import { Calendar, Users, Clock, Shield, Smartphone, CreditCard, BarChart, CheckCircle, Star, ArrowRight, Menu, X, Apple, Bell } from 'lucide-react'
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [androidEmail, setAndroidEmail] = useState('')
+  const [androidSubmitted, setAndroidSubmitted] = useState(false)
+
+  const handleAndroidNotify = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (androidEmail) {
+      try {
+        const response = await fetch('/api/notify-android', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email: androidEmail })
+        })
+        
+        if (response.ok) {
+          setAndroidSubmitted(true)
+          setAndroidEmail('')
+          setTimeout(() => setAndroidSubmitted(false), 5000)
+        }
+      } catch (error) {
+        console.error('Error submitting email:', error)
+      }
+    }
+  }
   
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
@@ -108,13 +133,35 @@ export default function Home() {
               Stop losing time on manual scheduling. Automate your entire booking process 
               and focus on what matters most - keeping children safe.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-lg text-lg font-semibold hover:shadow-xl transition transform hover:scale-105">
                 Start Free Trial
               </button>
               <button className="px-8 py-4 bg-white border-2 border-slate-200 text-slate-700 rounded-lg text-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition">
                 Watch Demo
               </button>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href="https://apps.apple.com/gb/app/totbook/id6749780830"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-6 py-3 bg-black text-white rounded-xl hover:bg-gray-800 transition"
+              >
+                <Apple className="w-5 h-5 mr-2" />
+                <div className="text-left">
+                  <div className="text-xs opacity-80">Download on the</div>
+                  <div className="text-sm font-semibold">App Store</div>
+                </div>
+              </a>
+              <div className="px-6 py-3 bg-gray-100 text-gray-500 rounded-xl flex items-center justify-center">
+                <Smartphone className="w-5 h-5 mr-2" />
+                <div className="text-left">
+                  <div className="text-xs">Android</div>
+                  <div className="text-sm font-semibold">Coming Soon</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -520,13 +567,49 @@ export default function Home() {
           <p className="text-xl text-blue-100 mb-8">
             Join hundreds of car seat professionals already using TotBook
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <button className="px-8 py-4 bg-white text-blue-600 rounded-lg text-lg font-semibold hover:shadow-xl transition transform hover:scale-105">
               Start 14-Day Free Trial
             </button>
-            <button className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg text-lg font-semibold hover:bg-white/10 transition">
+            <a 
+              href="https://apps.apple.com/gb/app/totbook/id6749780830"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg text-lg font-semibold hover:bg-white/10 transition"
+            >
+              <Apple className="w-5 h-5 mr-2" />
               Download from App Store
-            </button>
+            </a>
+          </div>
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 max-w-md mx-auto">
+            <h3 className="text-white font-semibold text-lg mb-3 flex items-center justify-center">
+              <Smartphone className="w-5 h-5 mr-2" />
+              Android Coming Soon!
+            </h3>
+            {!androidSubmitted ? (
+              <form onSubmit={handleAndroidNotify} className="flex flex-col sm:flex-row gap-3">
+                <input 
+                  type="email"
+                  placeholder="Enter your email"
+                  value={androidEmail}
+                  onChange={(e) => setAndroidEmail(e.target.value)}
+                  className="flex-1 px-4 py-2 rounded-lg text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-white/50"
+                  required
+                />
+                <button 
+                  type="submit"
+                  className="px-6 py-2 bg-white text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition flex items-center justify-center"
+                >
+                  <Bell className="w-4 h-4 mr-2" />
+                  Notify Me
+                </button>
+              </form>
+            ) : (
+              <div className="text-center py-3">
+                <CheckCircle className="w-6 h-6 text-white mx-auto mb-2" />
+                <p className="text-white">Thank you! We'll notify you when the Android app launches.</p>
+              </div>
+            )}
           </div>
           <p className="text-sm text-blue-100 mt-6">
             No credit card required • Setup in 5 minutes • Cancel anytime
